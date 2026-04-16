@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:15
+    # container_name: user-management-db
+    container_name: next-prisma-betterauth
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass12345word
+      POSTGRES_DB: next-prisma-betterauth-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
