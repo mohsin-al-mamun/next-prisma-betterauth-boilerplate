@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateUser } from "../lib/actions/users";
+import { updateUser, deleteUser } from "../lib/actions/users";
 
 // ✅ simple type (no Prisma import)
 type User = {
@@ -40,8 +40,10 @@ export default function UsersGrid({ users }: { users: User[] }) {
   const handleDelete = async () => {
     if (!selectedUser) return;
 
-    console.log("Delete:", selectedUser.id);
+    await deleteUser(selectedUser.id);
+
     setIsDeleteOpen(false);
+    window.location.reload(); // simple refresh
   };
 
   return (
