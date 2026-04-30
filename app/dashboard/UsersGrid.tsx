@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateUser, deleteUser } from "../lib/actions/users";
+import { updateUser, deleteUser, createUser } from "../lib/actions/users";
 
 // ✅ simple type (no Prisma import)
 type User = {
@@ -14,6 +14,7 @@ export default function UsersGrid({ users }: { users: User[] }) {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const [form, setForm] = useState({ name: "", email: "" });
 
@@ -46,9 +47,27 @@ export default function UsersGrid({ users }: { users: User[] }) {
     window.location.reload(); // simple refresh
   };
 
+  const handleCreate = async () => {
+    await createUser(form);
+
+    setIsCreateOpen(false);
+    setForm({ name: "", email: "" });
+
+    window.location.reload(); // simple refresh
+  };
+
   return (
     <div className="max-w-6xl mx-auto bg-white border border-gray-100 rounded-2xl shadow-sm p-6">
-      <h2 className="text-lg font-medium text-gray-800 mb-4">Users</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-medium text-gray-800">Users</h2>
+
+        <button
+          onClick={() => setIsCreateOpen(true)}
+          className="bg-black text-white px-4 py-2 rounded text-sm"
+        >
+          + Create User
+        </button>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {users.map((user) => (
@@ -141,6 +160,48 @@ export default function UsersGrid({ users }: { users: User[] }) {
               <button
                 onClick={() => setIsDeleteOpen(false)}
                 className="flex-1 border py-2 rounded  bg-green-500 text-white"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Create User Modal */}
+      {isCreateOpen && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-xl w-full max-w-md space-y-4">
+            <h3 className="text-lg font-semibold">Create User</h3>
+
+            <input
+              placeholder="Name"
+              value={form.name}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, name: e.target.value }))
+              }
+              className="w-full border p-2 rounded text-black"
+            />
+
+            <input
+              placeholder="Email"
+              value={form.email}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, email: e.target.value }))
+              }
+              className="w-full border p-2 rounded text-black"
+            />
+
+            <div className="flex gap-2">
+              <button
+                onClick={handleCreate}
+                className="flex-1 bg-black text-white py-2 rounded"
+              >
+                Create
+              </button>
+
+              <button
+                onClick={() => setIsCreateOpen(false)}
+                className="flex-1 border py-2 rounded"
               >
                 Cancel
               </button>
