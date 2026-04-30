@@ -63,7 +63,7 @@ export default function UsersGrid({ users }: { users: User[] }) {
 
         <button
           onClick={() => setIsCreateOpen(true)}
-          className="bg-black text-white px-4 py-2 rounded text-sm"
+          className="bg-black text-white px-4 py-2 rounded text-sm cursor-pointer"
         >
           + Create User
         </button>
@@ -86,14 +86,14 @@ export default function UsersGrid({ users }: { users: User[] }) {
             <div className="flex gap-2">
               <button
                 onClick={() => openEdit(user)}
-                className="flex-1 text-sm bg-black text-white py-1.5 rounded"
+                className="flex-1 text-sm bg-black text-white py-1.5 rounded cursor-pointer"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => openDelete(user)}
-                className="flex-1 text-sm bg-red-500 text-white py-1.5 rounded"
+                className="flex-1 text-sm bg-red-500 text-white py-1.5 rounded cursor-pointer"
               >
                 Delete
               </button>
@@ -127,14 +127,14 @@ export default function UsersGrid({ users }: { users: User[] }) {
             <div className="flex gap-2">
               <button
                 onClick={handleUpdate}
-                className="flex-1 bg-black text-white py-2 rounded"
+                className="flex-1 bg-black text-white py-2 rounded cursor-pointer"
               >
                 Update
               </button>
 
               <button
                 onClick={() => setIsEditOpen(false)}
-                className="flex-1 bg-green-500 text-white border py-2 rounded"
+                className="flex-1 bg-green-500 text-white border py-2 rounded cursor-pointer"
               >
                 Cancel
               </button>
@@ -152,14 +152,14 @@ export default function UsersGrid({ users }: { users: User[] }) {
             <div className="flex gap-2">
               <button
                 onClick={handleDelete}
-                className="flex-1 bg-red-500 text-white py-2 rounded"
+                className="flex-1 bg-red-500 text-white py-2 rounded cursor-pointer"
               >
                 Delete
               </button>
 
               <button
                 onClick={() => setIsDeleteOpen(false)}
-                className="flex-1 border py-2 rounded  bg-green-500 text-white"
+                className="flex-1 border py-2 rounded  bg-green-500 text-white cursor-pointer"
               >
                 Cancel
               </button>
@@ -171,7 +171,7 @@ export default function UsersGrid({ users }: { users: User[] }) {
       {isCreateOpen && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-xl w-full max-w-md space-y-4">
-            <h3 className="text-lg font-semibold">Create User</h3>
+            <h3 className="text-lg font-semibold text-black">Create User</h3>
 
             <input
               placeholder="Name"
@@ -194,14 +194,14 @@ export default function UsersGrid({ users }: { users: User[] }) {
             <div className="flex gap-2">
               <button
                 onClick={handleCreate}
-                className="flex-1 bg-black text-white py-2 rounded"
+                className="flex-1 bg-black text-white py-2 rounded cursor-pointer"
               >
                 Create
               </button>
 
               <button
                 onClick={() => setIsCreateOpen(false)}
-                className="flex-1 border py-2 rounded"
+                className="flex-1 border py-2 rounded bg-green-500 text-white cursor-pointer"
               >
                 Cancel
               </button>
